@@ -183,3 +183,9 @@ dmypy.json
 cython_debug/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,python,jupyternotebooks
+
+temp.py
+
+wandb
+wandb/
+wandb/*
