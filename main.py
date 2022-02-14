@@ -16,11 +16,24 @@ def main():
                         help="Environment name (default: CartPole-v1)")
     parser.add_argument("--num_traj",
                         default=1000,
+                        type=int,
                         metavar='N',
                         help="Number of trajectories to use as sample (default: 1000)")
-    parser.add_argument("--lr", default=0.003, metavar='G',help="Learning rate (default: 0.003)")
-    parser.add_argument("--epoch", default=200, metavar='N',help="Number of Epochs (default: 200)")
-    parser.add_argument("--seed", default=123456, metavar='N',help="Random seed (default: 123456)")
+    parser.add_argument("--lr",
+                        default=0.003,
+                        type=float,
+                        metavar='G',
+                        help="Learning rate (default: 0.003)")
+    parser.add_argument("--epoch",
+                        default=200,
+                        type=int,
+                        metavar='N',
+                        help="Number of Epochs (default: 200)")
+    parser.add_argument("--seed",
+                        default=123456,
+                        type=int,
+                        metavar='N',
+                        help="Random seed (default: 123456)")
     parser.add_argument("--cuda", action="store_true", help="Whether to use CUDA (default: False)")
     parser.add_argument('--wandb',
                         action="store_true",
@@ -60,6 +73,8 @@ def main():
                 'mean_traj_len': mean_traj_len,
                 'loss': loss,
             })
+        if ith_epoch % 20 == 0:
+            agent.save_model(epoch=ith_epoch)
 
 
 if __name__ == "__main__":

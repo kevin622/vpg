@@ -1,3 +1,5 @@
+import os
+
 import torch
 from torch.distributions.categorical import Categorical
 from torch.optim import Adam
@@ -12,6 +14,7 @@ class VPG:
         self.policy = Policy().to(self.device)
         self.policy_optim = Adam(self.policy.parameters(), lr=args.lr)
         self.num_traj = args.num_traj
+        self.env_name = args.env_name
         self.samples = []
 
     def create_samples(self, env):
@@ -54,3 +57,22 @@ class VPG:
         self.samples = []
 
         return loss
+    
+    def save_model(self, file_name=None, epoch=0):
+        if not os.path.exists('checkpoints/'):
+            os.makedirs('checkpoints/')
+        if file_name is None:
+            file_name = f'checkpoints/vpg_{self.env_name}_{epoch}'
+        torch.save({
+            'policy_state_dict': self.policy.state_dict(),
+            'policy_optim_state_dict': self.policy_optim.state_dict(),
+        }, file_name)
+    
+    def load_model(self, file_path):
+        if not os.path.exists(file_path):
+            print(f"{file_path} doesn't exist")
+            return
+        print(f'Loading model from {file_path}...')
+        checkpoint = torch.load(file_path)
+        self.policy.load_state_dict(checkpoint['policy_state_dict'])
+        self.policy_optim.load_state_dict(checkpoint['policy_optim_state_dict'])
