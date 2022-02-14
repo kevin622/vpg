@@ -10,7 +10,7 @@ This repository is for implementing VPG, Vanilla Policy Gradient. I referred to 
 
 ```bash
 for EPOCH
-	for num_samples
+  for num_samples
     trajectories = []
     state = env.reset()
     done = False
