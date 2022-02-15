@@ -25,7 +25,16 @@ for EPOCH
 ```
 
 ## Usage
+### Requirements
+- gym==0.21.0
+- torch==1.8.1+cu101
 
+```bash
+pip install torch==1.8.1+cu101 -f https://download.pytorch.org/whl/torch_stable.html
+
+```
+- wandb==0.12.10
+### Command
 ```bash
 usage: main.py [-h] [--env_name ENV_NAME] [--num_traj N] [--lr G] 
 							[--epoch N] [--seed N] [--cuda]
