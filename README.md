@@ -8,7 +8,7 @@ _Caution_ : This code is only works on cases when action space is discrete. The 
 
 ![스크린샷 2022-02-14 오후 9.46.00](figures/REINFORCE_algo.png)
 
-### pseudo code
+### Pseudo code
 
 ```bash
 for EPOCH
@@ -34,7 +34,7 @@ usage: main.py [-h] [--env_name ENV_NAME] [--num_traj N] [--lr G]
                [--wandb] [--wandb_id WANDB_ID] [--wandb_project WANDB_PROJECT]
 ```
 
-### optional arguments
+### Optional arguments
 
 - `--env_name` : Environment name (default: CartPole-v1)
     - valid options are `CartPole-v1`, `Acrobot-v1`, `MountainCar-v0`
@@ -51,9 +51,12 @@ CUDA_VISIBLE_DEVICES=1 python main.py --cuda --env_name Acrobot-v1 epoch 200
 
 ## Results
 
-### plot
+### Plot of change mean reward
+
+The reward of the `CartPole-v1` environment is the length of the trajecory.
+
 <img src="figures/CartPole-v1_mean_traj_len.png" width=500></img>
 
-### video
+### Video of learned agent
 <img src="figures/CarPole-v1_trained.gif" width=500 align='center'></img>
 
