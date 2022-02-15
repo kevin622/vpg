@@ -19,8 +19,9 @@ for EPOCH
     while not done
       action = policy(state)
       next_state, reward, done = env.step(action)
-    calculate reward_to_go
+    reward_to_go = sum(reward after current timepoint)
     trajectores.push([state, action, reward_to_go])
+  log_pi_tensor = log(policy(action_tensor | state_tensor))
   loss = sum(log_pi_tensor * reward_to_go_tensor) / num_samples
   loss.backward()
   optimizer.step()
