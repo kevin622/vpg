@@ -30,8 +30,8 @@ for EPOCH
 
 ```bash
 usage: main.py [-h] [--env_name ENV_NAME] [--num_traj N] [--lr G] 
-							[--epoch N] [--hidden_dim N] [--seed N] [--cuda]
-							[--wandb] [--wandb_id WANDB_ID] [--wandb_project WANDB_PROJECT]
+               [--epoch N] [--hidden_dim N] [--seed N] [--cuda]
+               [--wandb] [--wandb_id WANDB_ID] [--wandb_project WANDB_PROJECT]
 ```
 
 ### optional arguments
