@@ -2,6 +2,8 @@
 
 This repository is for implementing VPG, Vanilla Policy Gradient. I referred to [CS285 class](https://rail.eecs.berkeley.edu/deeprlcourse/) of UC Berkeley, [lecture 5](https://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-5.pdf), especially the _REINFORCE_ algorithm with utilizing _reward to go_.
 
+_Caution_ : This code is only works on cases when action space is discrete. The test is done on the [CartPole-v1](https://gym.openai.com/envs/CartPole-v1/) environment.
+
 ## Algorithm
 
 ![스크린샷 2022-02-14 오후 9.46.00](figures/REINFORCE_algo.png)
@@ -28,13 +30,14 @@ for EPOCH
 
 ```bash
 usage: main.py [-h] [--env_name ENV_NAME] [--num_traj N] [--lr G] 
-							[--epoch N] [--seed N] [--cuda]
+							[--epoch N] [--hidden_dim N] [--seed N] [--cuda]
 							[--wandb] [--wandb_id WANDB_ID] [--wandb_project WANDB_PROJECT]
 ```
 
 ### optional arguments
 
 - `--env_name` : Environment name (default: CartPole-v1)
+    - valid options are `CartPole-v1`, `Acrobot-v1`, `MountainCar-v0`
 - `--cuda` : Whether to use CUDA (default: False)
 - `--wandb`  : Whether use Weight and Bias for logging(default: False)
     - `--wandb_id` : ID for wandb account(default: None)
@@ -43,12 +46,14 @@ usage: main.py [-h] [--env_name ENV_NAME] [--num_traj N] [--lr G]
 ### Example
 
 ```bash
-CUDA_VISIBLE_DEVICES=1 python main.py --cuda
+CUDA_VISIBLE_DEVICES=1 python main.py --cuda --env_name Acrobot-v1 epoch 200
 ```
 
 ## Results
 
 ### plot
+<img src="figures/CartPole-v1_mean_traj_len.png" width=500></img>
 
 ### video
+<img src="figures/CarPole-v1_trained.gif" width=500 align='center'></img>
 

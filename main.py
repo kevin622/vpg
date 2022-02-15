@@ -13,7 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description="Vanilla Policy Gradient")
     parser.add_argument("--env_name",
                         default="CartPole-v1",
-                        help="Environment name (default: CartPole-v1)")
+                        help="Environment name (default: CartPole-v1). Valid options are `CartPole-v1`, `Acrobot-v1`, `MountainCar-v0`")
     parser.add_argument("--num_traj",
                         default=1000,
                         type=int,
@@ -29,6 +29,11 @@ def main():
                         type=int,
                         metavar='N',
                         help="Number of Epochs (default: 200)")
+    parser.add_argument("--hidden_dim",
+                        default=32,
+                        type=int,
+                        metavar='N',
+                        help="Dimension of layers (default: 32)")
     parser.add_argument("--seed",
                         default=123456,
                         type=int,
@@ -51,6 +56,7 @@ def main():
             'env_name': args.env_name,
             'num_traj': args.num_traj,
             'epoch': args.epoch,
+            'hidden_dim': args.hidden_dim,
             'seed': args.seed,
             'cuda': args.cuda,
             'wandb': args.wandb,
@@ -62,7 +68,7 @@ def main():
     torch.manual_seed(args.seed)
     np.random.seed(args.seed)
 
-    agent = VPG(args)
+    agent = VPG(args, env)
 
     for ith_epoch in range(1, args.epoch + 1):
         mean_traj_len = agent.create_samples(env)
