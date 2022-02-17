@@ -2,7 +2,7 @@
 
 This repository is for implementing VPG, Vanilla Policy Gradient. I referred to [CS285 class](https://rail.eecs.berkeley.edu/deeprlcourse/) of UC Berkeley, [lecture 5](https://rail.eecs.berkeley.edu/deeprlcourse/static/slides/lec-5.pdf), especially the _REINFORCE_ algorithm with utilizing _reward to go_.
 
-_Caution_ : This code is only works on cases when action space is discrete. The test is done on the [CartPole-v1](https://gym.openai.com/envs/CartPole-v1/) environment.
+_Caution_ : This code is only works on cases when action space is discrete. Test is done on the [CartPole-v1](https://gym.openai.com/envs/CartPole-v1/) environment.
 
 ## Algorithm
 
@@ -11,9 +11,11 @@ _Caution_ : This code is only works on cases when action space is discrete. The 
 ### Pseudo code
 
 ```bash
-for EPOCH
-  for num_samples
-    trajectories = []
+Define epoch, num_samples
+Initialize policy, optimizer
+for epoch
+	trajectories = []
+  for num_samples  
     state = env.reset()
     done = False
     while not done
@@ -21,8 +23,10 @@ for EPOCH
       next_state, reward, done = env.step(action)
     reward_to_go = sum(reward after current timepoint)
     trajectores.push([state, action, reward_to_go])
+  state_tensor, action_tensor, reward_to_go_tensor = trajectories
   log_pi_tensor = log(policy(action_tensor | state_tensor))
   loss = sum(log_pi_tensor * reward_to_go_tensor) / num_samples
+  optimizer.zero_grad()
   loss.backward()
   optimizer.step()
 ```
